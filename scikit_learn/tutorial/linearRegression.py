@@ -5,6 +5,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import PowerTransformer
 from sklearn.pipeline import Pipeline
 
+# prepare dataset
 dataset = load_boston()
 x = dataset.data
 t = dataset.target
@@ -14,7 +15,6 @@ t = dataset.target
 x_train, x_test, t_train, t_test = train_test_split(x, t, test_size=0.3, random_state=0)
 
 # パイプライン化を使用した場合
-
 pipline = Pipeline([
     ('scaler', PowerTransformer()),
     ('reg', LinearRegression())
@@ -24,8 +24,7 @@ pipline.fit(x_train, t_train)
 linear_result = pipline.score(x_test, t_test) # なんでこの処理でx_testの標準化までできちゃうの？？
 print(linear_result)
 
-# 下のコードはパイプライン化を使用しなかった場合
-
+# パイプライン化を使用しなかった場合
 # ### preprocessing ###
 # # scaler = StandardScaler()
 # scaler = PowerTransformer()
